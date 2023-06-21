@@ -1,0 +1,26 @@
+{
+  "name": "bank-challenge",
+  "version": "1.0.0",
+  "description": "oana demian's bank challenge",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OanaDemian/bank-challenge.git"
+  },
+  "author": "Oana Demian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OanaDemian/bank-challenge/issues"
+  },
+  "homepage": "https://github.com/OanaDemian/bank-challenge#readme",
+  "dependencies": {
+    "node": "^20.2.0"
+  },
+  "devDependencies": {}
+}
