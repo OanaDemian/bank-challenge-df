@@ -1,27 +1,32 @@
 import Transaction from '../src/Transaction.js';
 
 describe('Transaction Tests', () => {
-  it('should add 1000 to the balance when a deposit transaction is made', () => {
+  it('should get the balance', () => {
     //Arrange
-    let initialBalance = 0;
-    let expected = 1000.00;
-    let transaction = new Transaction(initialBalance);
+    let initialBalance = 100;
+    let amount = 200;
+    let date = '10-01-2012';
+    let type = 'credit';
+    let expected = 100;
+    let transaction = new Transaction(initialBalance, date, type, amount)
     //Act
-    transaction.depositSum(1000.00);
+    const balanceToGet = transaction.getBalance();
     //Assert
-    expect(transaction.getBalance()).toBe(1000.00);
+    expect(balanceToGet).toBe(expected);
   })
 
-  it('should add another 2000 to the balance when a deposit transaction is made', () => {
+  it('should get the amount', () => {
     //Arrange
-    let initialBalance = 0;
-    let expected = 3000.00;
-    let transaction = new Transaction(initialBalance);
+    let initialBalance = 100;
+    let amount = 200;
+    let date = '10-01-2012';
+    let type = 'credit';
+    let expected = 200;
+    let transaction = new Transaction(initialBalance, date, type, amount)
     //Act
-      transaction.depositSum(1000.00);
-      transaction.depositSum(2000.00);
+    const amountToGet = transaction.getAmount();
     //Assert
-    expect(transaction.getBalance()).toBe(3000.00);
+    expect(amountToGet).toBe(expected);
   })
 
   it('should format transaction date to dd/mm/yyyy', () => {
@@ -30,22 +35,22 @@ describe('Transaction Tests', () => {
     let expected = '10/01/2012';
     let transaction = new Transaction();
     //Act
-    transaction.formatTransactionDate(initialDate);
+    transaction.formatDate(initialDate);
     //Assert
     expect(transaction.getDate()).toBe(expected);
   })
 
-  it('should subtract 500 from the balance when a withdrawal transaction is made', () => {
+  it('should get the transaction type', () => {
     //Arrange
-    let initialBalance = 0;
-    let expected = 2500.00;
-    let transaction = new Transaction(initialBalance);
+    let initialBalance = 100;
+    let amount = 200;
+    let date = '10-01-2012';
+    let type = 'credit';
+    let expected = 'credit';
+    let transaction = new Transaction(initialBalance, date, type, amount)
     //Act
-    transaction.depositSum(1000.00);
-    transaction.depositSum(2000.00);
-    transaction.withdrawSum(500.00);
-
+    const typeToGet = transaction.getType();
     //Assert
-    expect(transaction.getBalance()).toBe(2500.00);
+    expect(typeToGet).toBe(expected);
   })
 })
