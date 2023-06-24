@@ -12,7 +12,7 @@ describe('Transaction Tests', () => {
     expect(transaction.getBalance()).toBe(1000.00);
   })
 
-    it('should add another 2000 to the balance when a deposit transaction is made', () => {
+  it('should add another 2000 to the balance when a deposit transaction is made', () => {
     //Arrange
     let initialBalance = 0;
     let expected = 3000.00;
@@ -22,5 +22,19 @@ describe('Transaction Tests', () => {
       transaction.depositSum(2000);
     //Assert
     expect(transaction.getBalance()).toBe(3000.00);
+  })
+
+  it('should subtract 500 from the balance when a withdrawal transaction is made', () => {
+    //Arrange
+    let initialBalance = 0;
+    let expected = 2500.00;
+    let transaction = new Transaction(initialBalance);
+    //Act
+    transaction.depositSum(1000);
+    transaction.depositSum(2000);
+    transaction.withdrawSum(500);
+
+    //Assert
+    expect(transaction.getBalance()).toBe(2500.00);
   })
 })
