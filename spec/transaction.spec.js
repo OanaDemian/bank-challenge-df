@@ -24,6 +24,17 @@ describe('Transaction Tests', () => {
     expect(transaction.getBalance()).toBe(3000.00);
   })
 
+  it('should format transaction date to dd/mm/yyyy', () => {
+    //Arrange
+    let initialDate = '10-01-2012';
+    let expected = '10/01/2012';
+    let transaction = new Transaction();
+    //Act
+    transaction.formatTransactionDate(initialDate);
+    //Assert
+    expect(transaction.getDate()).toBe(expected);
+  })
+
   it('should subtract 500 from the balance when a withdrawal transaction is made', () => {
     //Arrange
     let initialBalance = 0;
