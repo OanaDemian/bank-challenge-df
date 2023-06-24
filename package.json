@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "oana demian's bank challenge",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
