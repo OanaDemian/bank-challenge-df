@@ -33,6 +33,18 @@ describe('Account Tests', () => {
         expect(transactionSpy).toHaveBeenCalledOnceWith(depositSum);
     });
   
+    it('should call withdrawSum on the transaction object when debit is called on the account', () => { 
+      // Arrange
+      const transactionSpy = spyOn(transaction, `withdrawSum`)
+      const withdrawSum = 500.00;
+      
+        // Act
+        account.debit(withdrawSum);
+
+        // Assert
+        expect(transactionSpy).toHaveBeenCalledOnceWith(withdrawSum);
+    });
+  
       it('should call getBalance on the transaction object when getBalance is called on the account', () => {
         // Arrange
         const transactionSpy = spyOn(transaction, `getBalance`);
