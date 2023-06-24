@@ -1,14 +1,26 @@
 import Transaction from '../src/Transaction.js';
 
 describe('Transaction Tests', () => {
+  let initialBalance, amount, type, transaction, date;
+  beforeEach(() => {
+    initialBalance = 100;
+    amount = 200;
+    date = new Date(2012,1,10);
+    type = 'credit';
+    transaction = new Transaction(initialBalance, date, type, amount);
+  });
+
+  afterEach(() => {
+    initialBalance = undefined;
+    amount = undefined;
+    date = undefined;
+    type = undefined;
+    transaction = undefined;
+  });
+
   it('should get the current balance', () => {
     //Arrange
-    let initialBalance = 100;
-    let amount = 200;
-    let date = new Date(2012,1,10);
-    let type = 'credit';
     let expected = 100;
-    let transaction = new Transaction(initialBalance, date, type, amount)
     //Act
     const balanceToGet = transaction.getBalance();
     //Assert
@@ -17,12 +29,7 @@ describe('Transaction Tests', () => {
 
   it('should get the transaction amount', () => {
     //Arrange
-    let initialBalance = 100;
-    let amount = 200;
-    let date = new Date(2012,1,10);
-    let type = 'credit';
     let expected = 200;
-    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
     const amountToGet = transaction.getAmount();
     //Assert
@@ -31,12 +38,7 @@ describe('Transaction Tests', () => {
 
   it('should format transaction date to dd/mm/yyyy', () => {
     //Arrange
-    let initialBalance = 100;
-    let amount = 200;
-    let date = new Date(2012,1,10);
-    let type = 'credit';
     let expected = '10/02/2012';
-    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
     const formattedDate = transaction.getFormattedDate();
     //Assert
@@ -45,12 +47,7 @@ describe('Transaction Tests', () => {
 
   it('should get the transaction type: credit or debit', () => {
     //Arrange
-    let initialBalance = 100;
-    let amount = 200;
-    let date = new Date(2012,1,10);
-    let type = 'credit';
     let expected = 'credit';
-    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
     const typeToGet = transaction.getType();
     //Assert
