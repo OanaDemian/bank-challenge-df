@@ -32,4 +32,14 @@ describe('Account Tests', () => {
         // Assert
         expect(transactionSpy).toHaveBeenCalledOnceWith(depositSum);
     });
+  
+      it('should call getBalance on the transaction object when getBalance is called on the account', () => {
+        // Arrange
+        const transactionSpy = spyOn(transaction, `getBalance`);
+        // Act
+        account.getBalance();
+
+        // Assert
+        expect(transactionSpy).toHaveBeenCalledTimes(1);
+    });
 });
