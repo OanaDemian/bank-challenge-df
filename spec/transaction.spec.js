@@ -1,11 +1,11 @@
 import Transaction from '../src/Transaction.js';
 
 describe('Transaction Tests', () => {
-  it('should get the balance', () => {
+  it('should get the current balance', () => {
     //Arrange
     let initialBalance = 100;
     let amount = 200;
-    let date = '10-01-2012';
+    let date = new Date(2012,1,10);
     let type = 'credit';
     let expected = 100;
     let transaction = new Transaction(initialBalance, date, type, amount)
@@ -15,14 +15,14 @@ describe('Transaction Tests', () => {
     expect(balanceToGet).toBe(expected);
   })
 
-  it('should get the amount', () => {
+  it('should get the transaction amount', () => {
     //Arrange
     let initialBalance = 100;
     let amount = 200;
-    let date = '10-01-2012';
+    let date = new Date(2012,1,10);
     let type = 'credit';
     let expected = 200;
-    let transaction = new Transaction(initialBalance, date, type, amount)
+    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
     const amountToGet = transaction.getAmount();
     //Assert
@@ -31,23 +31,26 @@ describe('Transaction Tests', () => {
 
   it('should format transaction date to dd/mm/yyyy', () => {
     //Arrange
-    let initialDate = '10-01-2012';
-    let expected = '10/01/2012';
-    let transaction = new Transaction();
+    let initialBalance = 100;
+    let amount = 200;
+    let date = new Date(2012,1,10);
+    let type = 'credit';
+    let expected = '10/02/2012';
+    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
-    transaction.formatDate(initialDate);
+    const formattedDate = transaction.getFormattedDate();
     //Assert
-    expect(transaction.getDate()).toBe(expected);
+    expect(formattedDate).toBe(expected);
   })
 
-  it('should get the transaction type', () => {
+  it('should get the transaction type: credit or debit', () => {
     //Arrange
     let initialBalance = 100;
     let amount = 200;
-    let date = '10-01-2012';
+    let date = new Date(2012,1,10);
     let type = 'credit';
     let expected = 'credit';
-    let transaction = new Transaction(initialBalance, date, type, amount)
+    let transaction = new Transaction(initialBalance, date, type, amount);
     //Act
     const typeToGet = transaction.getType();
     //Assert
