@@ -7,7 +7,7 @@ describe('Transaction Tests', () => {
     let expected = 1000.00;
     let transaction = new Transaction(initialBalance);
     //Act
-    transaction.depositSum(1000);
+    transaction.depositSum(1000.00);
     //Assert
     expect(transaction.getBalance()).toBe(1000.00);
   })
@@ -18,8 +18,8 @@ describe('Transaction Tests', () => {
     let expected = 3000.00;
     let transaction = new Transaction(initialBalance);
     //Act
-      transaction.depositSum(1000);
-      transaction.depositSum(2000);
+      transaction.depositSum(1000.00);
+      transaction.depositSum(2000.00);
     //Assert
     expect(transaction.getBalance()).toBe(3000.00);
   })
@@ -30,9 +30,9 @@ describe('Transaction Tests', () => {
     let expected = 2500.00;
     let transaction = new Transaction(initialBalance);
     //Act
-    transaction.depositSum(1000);
-    transaction.depositSum(2000);
-    transaction.withdrawSum(500);
+    transaction.depositSum(1000.00);
+    transaction.depositSum(2000.00);
+    transaction.withdrawSum(500.00);
 
     //Assert
     expect(transaction.getBalance()).toBe(2500.00);
