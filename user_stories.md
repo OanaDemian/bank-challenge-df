@@ -8,7 +8,7 @@ I want to be able to make a withdrawal from my bank account,
 So that I can spend some of my money.
 
 As client of the bank,
-I want to have the date for each of my account transactions,
+I want to see the date of each of my account transactions,
 So that I can see the history of my transactions.
 
 As client of the bank,
@@ -41,21 +41,70 @@ date       || credit  || debit  || balance
 ```
 #### Domain Model
 
-| Objects     | Properties                  | Messages                       | Output   |
-| ----------- | ----------------------------| -------------------------------| -------- |
-| account     |  transaction @Transaction   | credit(@Transaction)           |  Void    |
-| transaction |  deposit, balance @Float    | getBalance()                   |  @Float  |
-| transaction |  deposit, balance @Float    | depositSum(sumToDeposit @Float)|  Void    |
+As client of the bank,
+I want to know the current balance of my bank account,
+So that I can take informed decisions regarding my finances.
+
+| Objects     | Properties                       | Messages                     | Output                |
+| ----------- | ---------------------------------|------------------------------| ----------------------|
+| account     |  transactions@Array[]            | getTransactions()            | @Array[Transaction]   |
+|             |  newBalance @Number              | getBalance()                 | @Number               |
+|             |  accountTransaction @Transaction | newTransaction(@Transaction) | @Void                 |
+| transaction |  amount @Number                  | getAmount()                  | @Number               |
+|             |  type @String                    | getType()                    | @String               |
+
+As a client of the bank,
+I want to be able make a deposit into my bank account,
+So that I can keep money safe.
+
+| Objects     | Properties                       | Messages                     | Output                |
+| ----------- | ---------------------------------|----------------------------- | --------------------- |
+| account     |  transactions@Array[]            | getTransactions()            | @Array[Transaction]   |
+|             |  newBalance @Number              | getBalance()                 | @Number               |
+|             |  accountTransaction @Transaction | newTransaction(@Transaction) | @Void                 |
+|             |                                  | deposit(amount @Number)      | @Void                 |
+| transaction |  amount @Number                  | getAmount()                  | @Number               |
+|             |  type @String                    | getType()                    | @String               |
+
+- test that calling getTransactions returns an empty array of transactions when account is first instantiated;
+
 
 As client of the bank,
 I want to be able to make a withdrawal from my bank account,
 So that I can spend some of my money.
 
-| Objects     | Properties                  | Messages                         | Output   |
-| ----------- | ----------------------------| ---------------------------------| -------- |
-| account     |  transaction @Transaction   | debit (@Transaction)             |  Void    |
-| transaction |  withdrawal, balance @Float | getBalance()                     |  @Float  |
-| transaction |  withdrawal, balance @Float | withdrawSum(sumToWithdraw @Float)|  Void    |
+| Objects     | Properties                       | Messages                     | Output                |
+| ----------- | ---------------------------------|------------------------------| ----------------------|
+| account     |  transactions@Array[]            | getTransactions()            | @Array[Transaction]   |
+|             |  newBalance @Number              | getBalance()                 | @Number               |
+|             |  accountTransaction @Transaction | newTransaction(@Transaction) | @Void                 |
+|             |                                  | withdrawal(amount @Number)   | @Void                 |
+| transaction |  amount @Number                  | getAmount()                  | @Number               |
+|             |  type @String                    | getType()                    | @String               |
+
+As client of the bank,  
+I want to see the date of each of my account transactions,
+So that I can see the history of my transactions.
+
+| Objects     | Properties                        | Messages                 | Output             |
+| ----------- | ----------------------------------|--------------------------| -------------------|
+| account     |  transactions@Array[]             | getTransactions()        | @Array[Transaction]|
+| transaction |  date @Date                       | getDate()                | @Date              |
+|             |  formattedDate @String            | formatDate()             | @String            |
+|             |                                   | getFormattedDate()       | @String            |
+
+- test that calling the getDate method on the Transaction object gets the date object;
+- test that calling the formatDate method on the Transaction object formats the date object to 'dd/mm/yyyy/;
+- test that calling the getFormattedDate on the Transaction object gets the formatted date;
+
+
+As client of the bank,
+I want to be able print a bank statement,
+So that I can see my deposits, withdrawals and my current ballance at a certain date.
+
+As client of the bank,
+I want to be able print the history of my account transactions on the bank statement in descending order,
+So that I can see the most recent transactions first.
 #### Tests
 
 1. Test that a new instance of `Lock` reports `locked` is `true`
@@ -65,13 +114,16 @@ So that I can spend some of my money.
 ---
 
 <!-- Account
-currentBalance @Float transactions@Array[] makeDeposit makeWithdrawal
+newBalance @Float transactions@Array[] 
 
 Transaction
-date @Date credit @Float debit @Float balance @Float
+date @Date type @String amount @Number
+getAmount()
+getType()
+formatDate()
+getDate()
 
 Bank Statement
 printTransactions
 
-Date
-getCurrentDate -->
+

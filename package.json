@@ -8,21 +8,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "npm test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OanaDemian/bank-challenge.git"
+    "test": "jasmine"
   },
   "author": "Oana Demian",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OanaDemian/bank-challenge/issues"
-  },
-  "homepage": "https://github.com/OanaDemian/bank-challenge#readme",
-  "dependencies": {
-    "node": "^20.2.0"
-  },
   "devDependencies": {
     "eslint": "^8.43.0",
     "jasmine": "^5.0.2"
