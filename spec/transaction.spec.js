@@ -1,31 +1,20 @@
 import Transaction from '../src/Transaction.js';
 
 describe('Transaction Tests', () => {
-  let initialBalance, amount, type, transaction, date;
+  let amount, type, transaction, date;
   beforeEach(() => {
-    initialBalance = 100;
     amount = 200;
     type = 'credit';
     date = new Date(2012,1,10);
-    transaction = new Transaction(initialBalance, date, type, amount);
+    transaction = new Transaction(date, type, amount);
   });
 
   afterEach(() => {
-    initialBalance = undefined;
     amount = undefined;
     date = undefined;
     type = undefined;
     transaction = undefined;
   });
-
-  it('should get the current balance', () => {
-    //Arrange
-    let expected = 100;
-    //Act
-    const balanceToGet = transaction.getBalance();
-    //Assert
-    expect(balanceToGet).toBe(expected);
-  })
 
   it('should get the transaction amount', () => {
     //Arrange
@@ -64,10 +53,10 @@ describe('Transaction Tests', () => {
   })
 
   describe('Transaction Type Debit Tests', () => {
-    let initialBalance, amount, type, transaction, date;
+    let amount, type, transaction, date;
     beforeEach(() => {
       type = 'debit';
-      transaction = new Transaction(initialBalance, date, type, amount);
+      transaction = new Transaction(date, type, amount);
     });
 
     afterEach(() => {
