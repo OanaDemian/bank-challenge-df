@@ -42,5 +42,14 @@ describe('Account Tests', () => {
         // Assert
         expect(testAccount.getTransactions().length).toBe(1);
     });
+
+    it('should add 1 transaction of type `credit` when called with newTransaction', () => {
+        // Arrange
+        // Act
+      testAccount.newTransaction(testTransaction);
+        // Assert
+        expect(testAccount.getTransactions()[0].type).toBe('credit');
+    });
+
   });
 });
