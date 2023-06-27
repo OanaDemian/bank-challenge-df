@@ -27,4 +27,20 @@ describe('Account Tests', () => {
         expect(testAccount.getTransactions().length).toBe(0);
     });
   });
+
+  describe('New Transaction tests', () => {
+    const testTransaction = {
+      amount: 1000,
+      type: 'credit',
+      balance: 0
+    };
+         
+    it('should add 1 transaction to the transactions when called with newTransaction', () => {
+        // Arrange
+        // Act
+        testAccount.newTransaction(testTransaction);
+        // Assert
+        expect(testAccount.getTransactions().length).toBe(1);
+    });
+  });
 });
