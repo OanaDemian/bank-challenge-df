@@ -11,7 +11,7 @@ describe('Account Tests', () => {
 
   beforeEach(() => {
     mockTransaction = new MockTransaction();
-    testAccount = new Account(mockTransaction);
+    testAccount = new Account();
   });
 
   afterEach(() => {
@@ -33,7 +33,7 @@ describe('Account Tests', () => {
     it('should add 1 transaction to the transactions when called with newTransaction', () => {
       // Arrange
       // Act
-      testAccount.newTransaction();
+      testAccount.newTransaction(mockTransaction);
       // Assert
       expect(testAccount.getTransactions().length).toBe(1);
     });
@@ -41,7 +41,21 @@ describe('Account Tests', () => {
     it('should add 1 transaction of type `credit` when called with newTransaction', () => {
       // Arrange
       // Act
-      testAccount.newTransaction();
+      testAccount.newTransaction(mockTransaction);
+      const transactionType = testAccount.getTransactions()[0].transaction.getType();
+      // Assert
+      expect(transactionType).toBe('credit');
+    });
+
+      it('should add another transaction of type `credit` when called with newTransaction', () => {
+      // Arrange
+      const transaction2 =  {
+        getAmount: () => 2000,
+        getType: () => 'credit'
+      };
+        
+      // Act
+      testAccount.newTransaction(mockTransaction);
       const transactionType = testAccount.getTransactions()[0].transaction.getType();
       // Assert
       expect(transactionType).toBe('credit');
@@ -56,12 +70,10 @@ describe('Account Tests', () => {
         // Arrange
       expected = 1000;
         // Act
-      testAccount.newTransaction();
+      testAccount.newTransaction(mockTransaction);
       const newBalance = testAccount.getBalance();
       // Assert
       expect(newBalance).toBe(expected);
     });
   });
-
-
 });
