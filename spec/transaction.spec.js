@@ -5,8 +5,8 @@ describe('Transaction Tests', () => {
   beforeEach(() => {
     initialBalance = 100;
     amount = 200;
-    date = new Date(2012,1,10);
     type = 'credit';
+    date = new Date(2012,1,10);
     transaction = new Transaction(initialBalance, date, type, amount);
   });
 
@@ -54,7 +54,7 @@ describe('Transaction Tests', () => {
     expect(formattedDate).toBe(expected);
   })
 
-  it('should get the transaction type: credit or debit', () => {
+  it('should get the transaction type: credit', () => {
     //Arrange
     let expected = 'credit';
     //Act
@@ -62,4 +62,27 @@ describe('Transaction Tests', () => {
     //Assert
     expect(typeToGet).toBe(expected);
   })
+
+  describe('Transaction Type Debit Tests', () => {
+    let initialBalance, amount, type, transaction, date;
+    beforeEach(() => {
+      type = 'debit';
+      transaction = new Transaction(initialBalance, date, type, amount);
+    });
+
+    afterEach(() => {
+      type = undefined;
+    });
+
+      it('should get the transaction type: debit', () => {
+    //Arrange
+    let expected = 'debit';
+    //Act
+    const typeToGet = transaction.getType();
+    //Assert
+    expect(typeToGet).toBe(expected);
+  })
+  
+  });
+
 })
