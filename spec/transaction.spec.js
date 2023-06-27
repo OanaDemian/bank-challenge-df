@@ -74,7 +74,7 @@ describe('Transaction Tests', () => {
       type = undefined;
     });
 
-      it('should get the transaction type: debit', () => {
+    it('should get the transaction type: debit', () => {
     //Arrange
     let expected = 'debit';
     //Act

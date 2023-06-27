@@ -1,67 +1,30 @@
 import Account from '../src/Account.js';
 
-class MockTransaction {
-  depositSum = sumToDeposit => { }
-  withdrawSum = sumToWithdraw => { }
-  getBalance = () => 1000.00
-  getTransactionDate = () => '11.01.2012'
-}
 
 describe('Account Tests', () => {
 
-  let account, transaction;
+  const mockTransaction  = {
+    getBalance() { },
+    getType() { },
+    getAmount() { }
+  }
+  
+  let testAccount;
 
   beforeEach(() => {
-    transaction = new MockTransaction();
-    account = new Account(transaction);
+    testAccount = new Account(mockTransaction);
   });
 
   afterEach(() => {
-    transaction = undefined;
-    account = undefined;
+    testAccount = undefined;
   });
-    
-  it('should call depositSum on the transaction object when credit is called on the account', () => {
-        
-    // Arrange
-    const transactionSpy = spyOn(transaction, `depositSum`)
-    const depositSum = 1000.00;
-      
-    // Act
-    account.credit(depositSum);
 
-    // Assert
-    expect(transactionSpy).toHaveBeenCalledOnceWith(depositSum);
-  });
-  
-  it('should call withdrawSum on the transaction object when debit is called on the account', () => {
-    // Arrange
-    const transactionSpy = spyOn(transaction, `withdrawSum`)
-    const withdrawSum = 500.00;
-      
-    // Act
-    account.debit(withdrawSum);
-
-    // Assert
-    expect(transactionSpy).toHaveBeenCalledOnceWith(withdrawSum);
-  });
-  
-  it('should call getBalance on the transaction object when getBalance is called on the account', () => {
-    // Arrange
-    const transactionSpy = spyOn(transaction, `getBalance`);
-    // Act
-    account.getBalance();
-
-    // Assert
-    expect(transactionSpy).toHaveBeenCalledTimes(1);
-  });
-  
-  it('should call getTransactionDate on the transaction object when getTransactionDate is called on the account', () => {
-    // Arrange
-    const transactionSpy = spyOn(transaction, `getTransactionDate`);
-    // Act
-    account.getTransactionDate();
-    // Assert
-    expect(transactionSpy).toHaveBeenCalledTimes(1);
+  describe('Get Transactions tests', () => {   
+    it('should return an empty array of transactions when first instantiated', () => {
+        // Arrange
+        // Act
+        // Assert
+        expect(testAccount.getTransactions().length).toBe(0);
+    });
   });
 });
