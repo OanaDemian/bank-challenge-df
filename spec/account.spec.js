@@ -48,7 +48,7 @@ describe('Account Tests', () => {
       expect(transactionType).toBe('credit');
     });
 
-      it('should add another transaction of type `credit` when called with newTransaction', () => {
+    it('should add another transaction of type `credit` when called with newTransaction', () => {
       // Arrange
       const transaction2 =  {
         getAmount: () => 2000,
@@ -58,6 +58,26 @@ describe('Account Tests', () => {
       // Act
       testAccount.newTransaction(mockTransaction);
       testAccount.newTransaction(transaction2);
+      const newBalance = testAccount.getBalance();
+      // Assert
+      expect(newBalance).toBe(expected);
+    });
+
+    it('should add another transaction of type `debit` when called with newTransaction', () => {
+      // Arrange
+      const transaction2 =  {
+        getAmount: () => 2000,
+        getType: () => 'credit'
+      };
+      const transaction3 =  {
+        getAmount: () => 500,
+        getType: () => 'debit'
+      };
+        expected = 2500;
+      // Act
+      testAccount.newTransaction(mockTransaction);
+      testAccount.newTransaction(transaction2);
+      testAccount.newTransaction(transaction3);
       const newBalance = testAccount.getBalance();
       // Assert
       expect(newBalance).toBe(expected);
