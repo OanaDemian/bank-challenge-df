@@ -35,9 +35,24 @@ describe('Account Tests', () => {
       // Act
       testAccount.newTransaction(mockTransaction);  
       // Assert
-      expect(transactionSpy).toHaveBeenCalledTimes(1); // getAmount is called when the if statement evaluates to true
+      expect(transactionSpy).toHaveBeenCalledTimes(2); // getAmount is called when the if statement evaluates to true and during account checks
   });
 
+
+  describe('Account Error Checks tests', () => {
+      it('should throw an error if the transaction amount is less than 0', () => {
+      // Arrange
+        const expected = 'Error: Transaction amount must be greater than 0.';
+        const debitTransaction =  {
+          getAmount: () => - 500,
+          getType: () => 'debit'
+        };
+      // Act
+      // Assert
+        expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); // getAmount is called when the if statement evaluates to true
+  });
+
+  });
 
   describe('Get Transactions tests', () => {   
     it('should return an empty array of transactions when first instantiated', () => {
