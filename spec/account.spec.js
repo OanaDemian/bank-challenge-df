@@ -20,6 +20,16 @@ describe('Account Tests', () => {
     mockTransaction = undefined;
   });
 
+  it('should call getType on the transaction object twice when newTransaction is called on the account', () => {
+      // Arrange
+      const transactionSpy = spyOn(mockTransaction, `getType`)
+      // Act
+      testAccount.newTransaction(mockTransaction);  
+      // Assert
+      expect(transactionSpy).toHaveBeenCalledTimes(2);
+  });
+
+  
   describe('Get Transactions tests', () => {   
     it('should return an empty array of transactions when first instantiated', () => {
         // Arrange
