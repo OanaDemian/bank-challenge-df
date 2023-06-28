@@ -127,3 +127,6 @@ Bank Statement
 printTransactions
 
 
+Questions:
+
+- is date injected or hard coded in my Transaction spec?

@@ -8,7 +8,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "lint": "npx eslint src",
+    "lint:fix": "npx eslint src --fix"
   },
   "author": "Oana Demian",
   "license": "ISC",
