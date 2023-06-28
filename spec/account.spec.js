@@ -26,10 +26,19 @@ describe('Account Tests', () => {
       // Act
       testAccount.newTransaction(mockTransaction);  
       // Assert
-      expect(transactionSpy).toHaveBeenCalledTimes(2);
+      expect(transactionSpy).toHaveBeenCalledTimes(2); // getType is called once in each of the 2 if statements
   });
 
-  
+    it('should call getAmount on the transaction object when newTransaction is called on the account', () => {
+      // Arrange
+      const transactionSpy = spyOn(mockTransaction, `getAmount`)
+      // Act
+      testAccount.newTransaction(mockTransaction);  
+      // Assert
+      expect(transactionSpy).toHaveBeenCalledTimes(1); // getAmount is called when the if statement evaluates to true
+  });
+
+
   describe('Get Transactions tests', () => {   
     it('should return an empty array of transactions when first instantiated', () => {
         // Arrange
