@@ -16,21 +16,21 @@ class Account {
   getBalance() {
     return this.#newBalance;
   }
-  
-  deposit() {
+
+  #privateDeposit() {
     this.#newBalance = this.#newBalance + this.#transaction.getAmount();
     this.#transactions = [...this.#transactions, { transaction: this.#transaction, newBalance: this.#newBalance}];  
   }
 
-  withdrawal() {
+  #privateWithdrawal() {
     this.#newBalance = this.#newBalance - this.#transaction.getAmount();
     this.#transactions = [...this.#transactions, { transaction: this.#transaction, newBalance: this.#newBalance}];  
   }
 
   newTransaction(transaction) {
     this.#transaction = transaction;
-    if (this.#transaction.getType() === 'credit') this.deposit();
-    if (this.#transaction.getType() === 'debit')  this.withdrawal();
+    if (this.#transaction.getType() === 'credit') this.#privateDeposit();
+    if (this.#transaction.getType() === 'debit')  this.#privateWithdrawal();
   }
 }
 
