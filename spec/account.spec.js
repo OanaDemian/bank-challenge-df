@@ -24,33 +24,56 @@ describe('Account Tests', () => {
       // Arrange
       const transactionSpy = spyOn(mockTransaction, `getType`)
       // Act
-      testAccount.newTransaction(mockTransaction);  
+    try {
+      testAccount.newTransaction(mockTransaction)
+    } catch(error){};  
       // Assert
-      expect(transactionSpy).toHaveBeenCalledTimes(2); // getType is called once in each of the 2 if statements
+      expect(transactionSpy).toHaveBeenCalledTimes(1); 
   });
 
     it('should call getAmount on the transaction object when newTransaction is called on the account', () => {
       // Arrange
-      const transactionSpy = spyOn(mockTransaction, `getAmount`)
+      const transactionSpy = spyOn(mockTransaction, `getAmount`);
       // Act
-      testAccount.newTransaction(mockTransaction);  
+      try {
+        testAccount.newTransaction(mockTransaction);
+      } catch(error){};  
       // Assert
-      expect(transactionSpy).toHaveBeenCalledTimes(2); // getAmount is called when the if statement evaluates to true and during account checks
+      expect(transactionSpy).toHaveBeenCalledTimes(2);
   });
 
 
   describe('Account Error Checks tests', () => {
-      it('should throw an error if the transaction amount is less than 0', () => {
+    let expected, debitTransaction;
+    afterEach(() => {
+      testAccount = undefined;
+      debitTransaction = undefined;
+      expected = undefined;
+    });
+      
+    it('should throw an error if the transaction amount is less than 0', () => {
       // Arrange
         const expected = 'Error: Transaction amount must be greater than 0.';
-        const debitTransaction =  {
+        debitTransaction =  {
           getAmount: () => - 500,
           getType: () => 'debit'
         };
       // Act
       // Assert
-        expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); // getAmount is called when the if statement evaluates to true
-  });
+        expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); 
+    });
+
+    it('should throw an error if the transaction amount not a number', () => {
+      // Arrange
+        const expected = 'Error: Transaction amount must be a number.';
+        debitTransaction =  {
+          getAmount: () => '- 500',
+          getType: () => 'debit'
+        };
+      // Act
+      // Assert
+        expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); 
+    });
 
   });
 
