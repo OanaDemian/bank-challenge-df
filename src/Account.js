@@ -19,7 +19,7 @@ class Account {
 
   #privateBankAccountChecks(transaction) {
     this.#privateAmountChecks(transaction);
-    // this.#privateTypeChecks(transaction);
+    this.#privateTypeChecks(transaction);
     this.#privateAmountPositiveChecks(transaction);
   }
 
@@ -35,11 +35,11 @@ class Account {
     }
   }
 
-  // #privateTypeChecks(transaction) {
-  //   if (typeof (transaction.getType()) != "string") {
-  //     throw new Error("Error: Transaction type must be a string.");
-  //   }
-  // }
+  #privateTypeChecks(transaction) {
+    if (typeof (transaction.getType()) != "string") {
+      throw new Error("Error: Transaction type must be a string.");
+    }
+  }
 
   #privateDeposit() {
     this.#balance = this.#balance + this.#transaction.getAmount();

@@ -19,13 +19,13 @@ describe('Account Tests', () => {
       mockTransaction = undefined;
     });
 
-    it('should call getType on the transaction object twice when newTransaction is called on the account', () => {
+    it('should call getType on the transaction object when newTransaction is called on the account', () => {
       // Arrange
       const transactionSpy = spyOn(mockTransaction, `getType`)
       // Act
-      // try {
+      try {
       testAccount.newTransaction(mockTransaction);
-      // } catch(error){};  
+      } catch(error){};  
       // Assert
       expect(transactionSpy).toHaveBeenCalled();
     });
@@ -73,17 +73,17 @@ describe('Account Tests', () => {
         expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); 
     });
 
-    //   it('should throw an error if the transaction type not a string', () => {
-    //   // Arrange
-    //     const expected = 'Error: Transaction type must be a string.';
-    //     debitTransaction =  {
-    //       getAmount: () => 500,
-    //       getType: () => false
-    //     };
-    //   // Act
-    //   // Assert
-    //     expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); 
-    // });
+      it('should throw an error if the transaction type not a string', () => {
+      // Arrange
+        const expected = 'Error: Transaction type must be a string.';
+        debitTransaction =  {
+          getAmount: () => 500,
+          getType: () => false
+        };
+      // Act
+      // Assert
+        expect(() => { testAccount.newTransaction(debitTransaction) }).toThrowError(expected); 
+    });
 
   });
 
