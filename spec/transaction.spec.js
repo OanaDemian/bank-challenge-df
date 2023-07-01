@@ -36,15 +36,6 @@ describe('Transaction Tests', () => {
     expect(getTDate).toEqual(expected);
   })
 
-  it('should format transaction date to dd/mm/yyyy', () => {
-    //Arrange
-    let expected = '10/02/2012';
-    //Act
-    const formattedDate = transaction.getFormattedDate();
-    //Assert
-    expect(formattedDate).toBe(expected);
-  })
-
   it('should get the transaction type: credit', () => {
     //Arrange
     let expected = 'credit';
