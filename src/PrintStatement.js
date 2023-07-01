@@ -1,9 +1,13 @@
 class PrintStatement { 
   static #headerRow = "date       || credit  || debit  || balance";
-  static formattedTransaction = '';
 
   static printHeader() {
     return this.#headerRow;
+  }
+
+  static formatDate(transaction) {
+    return transaction.getDate().toLocaleDateString("en-GB");
+
   }
 }
 
