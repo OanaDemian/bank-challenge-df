@@ -10,7 +10,7 @@ describe('PrintStatement Tests', () => {
     expect(header).toBe(expected);
   })
 
-  describe('formatting columns tests', () => {
+  describe('formatting bank statement columns tests', () => {
     
     it('should format transaction date to dd/mm/yyyy', () => {
       //Arrange
@@ -23,6 +23,21 @@ describe('PrintStatement Tests', () => {
       const formattedDate = PrintStatement.formatDate(mockTransaction);
       //Assert
       expect(formattedDate).toBe(expected);
+    })
+
+    it('should format transaction date column to `dd/mm/yyyy || `', () => {
+      //Arrange
+      class MockTransaction {
+        getDate = () => new Date(2012, 0, 10)
+      }
+      const mockTransaction = new MockTransaction();
+      let expected = '10/01/2012 || ';
+      //Act
+      const formatDateColumn = PrintStatement.formatDateColumn(mockTransaction);
+      //Assert
+      expect(formatDateColumn).toBe(expected);
+
+      
     })
   })
 
