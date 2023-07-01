@@ -11,6 +11,13 @@ class PrintStatement {
     return '        || ';
   }
 
+  static formatDebitColumn(transaction) {
+    if (transaction.getType() === 'debit') {
+      return PrintStatement.formatTransactionAmount(transaction) + ' || ';
+    }
+    return '       || ';
+  } 
+
   static formatTransactionAmount(transaction) {
     return PrintStatement.formatAmount(transaction.getAmount());
   }

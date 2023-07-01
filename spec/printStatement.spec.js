@@ -51,6 +51,21 @@ describe('PrintStatement Tests', () => {
       //Assert
       expect(formatCreditColumn).toBe(expected);
     })
+
+    it('should format transaction debit column ', () => {
+      //Arrange
+      class MockTransaction {
+        getType = () => 'debit';
+        getAmount = () => 500.45678
+      }
+      const mockTransaction = new MockTransaction();
+      let expected = '500.45 || ';
+      //Act
+      const formatDebitColumn = PrintStatement.formatDebitColumn(mockTransaction);
+      //Assert
+      expect(formatDebitColumn).toBe(expected);
+    })
+    
   })
 
 });
