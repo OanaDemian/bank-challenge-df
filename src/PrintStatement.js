@@ -4,6 +4,15 @@ class PrintStatement {
   static printHeader() {
     return this.#headerRow;
   }
+
+  static statementRow(transaction) {
+    const date = PrintStatement.formatDateColumn(transaction);
+    const credit = PrintStatement.formatCreditColumn(transaction);
+    const debit = PrintStatement.formatDebitColumn(transaction);
+    const transactionRow = date + credit + debit;
+    return transactionRow; 
+  }
+
   static formatCreditColumn(transaction) {
     if (transaction.getType() === 'credit') {
       return PrintStatement.formatTransactionAmount(transaction) + ' || ';
@@ -34,6 +43,7 @@ class PrintStatement {
   static formatDateColumn(transaction) {
     return (PrintStatement.formatDate(transaction) + " || ");
   }
+
   static formatDate(transaction) {
     return transaction.getDate().toLocaleDateString("en-GB");
   }

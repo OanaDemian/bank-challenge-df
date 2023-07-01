@@ -65,7 +65,22 @@ describe('PrintStatement Tests', () => {
       //Assert
       expect(formatDebitColumn).toBe(expected);
     })
-    
   })
 
+  describe('formatting bank statement rows tests', () => {
+    it('should print a row with a date, credit and debit formatted values ', () => {
+    //Arrange
+      class MockTransaction {
+        getType = () => 'credit';
+        getAmount = () => 1500.55555;
+        getDate = () => new Date(2012, 0, 13);
+      }
+      const mockTransaction = new MockTransaction();
+      let expected = '13/01/2012 || 1500.55 ||        || ';
+      //Act
+      const formattedBankStatementRow = PrintStatement.statementRow(mockTransaction);
+      //Assert
+      expect(formattedBankStatementRow).toBe(expected);
+    })
+})
 });
