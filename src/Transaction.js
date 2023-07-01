@@ -12,7 +12,7 @@ class Transaction {
   }
 
   getType() {
-    return this.#type;
+    return this.#type.type;
   }
 
   getAmount() {

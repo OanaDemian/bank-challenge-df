@@ -4,7 +4,9 @@ describe('Transaction Tests', () => {
   let amount, type, transaction, date;
   beforeEach(() => {
     amount = 200;
-    type = 'credit';
+    type = {
+      type: "credit"
+    };
     date = new Date(2012,1,10);
     transaction = new Transaction(date, type, amount);
   });
@@ -55,7 +57,9 @@ describe('Transaction Tests', () => {
   describe('Transaction Type Debit Tests', () => {
     let amount, type, transaction, date;
     beforeEach(() => {
-      type = 'debit';
+      type = {
+        type: 'debit'
+      };
       transaction = new Transaction(date, type, amount);
     });
 
