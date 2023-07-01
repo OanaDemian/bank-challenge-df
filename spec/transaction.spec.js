@@ -1,20 +1,20 @@
 import Transaction from '../src/Transaction.js';
 
 describe('Transaction Tests', () => {
-  let amount, type, transaction, date;
+  let amount, mockTxnType, transaction, date;
   beforeEach(() => {
     amount = 200;
-    type = {
+    mockTxnType = {
       type: "credit"
     };
     date = new Date(2012,1,10);
-    transaction = new Transaction(date, type, amount);
+    transaction = new Transaction(date, mockTxnType, amount);
   });
 
   afterEach(() => {
     amount = undefined;
     date = undefined;
-    type = undefined;
+    mockTxnType = undefined;
     transaction = undefined;
   });
 
@@ -55,16 +55,16 @@ describe('Transaction Tests', () => {
   })
 
   describe('Transaction Type Debit Tests', () => {
-    let amount, type, transaction, date;
+    let amount, mockTxnType, transaction, date;
     beforeEach(() => {
-      type = {
+      mockTxnType = {
         type: 'debit'
       };
-      transaction = new Transaction(date, type, amount);
+      transaction = new Transaction(date, mockTxnType, amount);
     });
 
     afterEach(() => {
-      type = undefined;
+      mockTxnType = undefined;
     });
 
     it('should get the transaction type: debit', () => {
