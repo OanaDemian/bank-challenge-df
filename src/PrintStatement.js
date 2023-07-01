@@ -5,6 +5,15 @@ class PrintStatement {
     return this.#headerRow;
   }
 
+  static createTransactionsRowsArray(transactionsArray) {
+    const outputArray = [];
+    outputArray.push(PrintStatement.#headerRow);
+    for (let i = 0; i < transactionsArray.length; i++) {
+      outputArray.push(PrintStatement.statementRow(transactionsArray[i].transaction).concat(PrintStatement.formatAmount(transactionsArray[i].balance)));
+    }
+    return outputArray;
+  }
+
   static statementRow(transaction) {
     const date = PrintStatement.formatDateColumn(transaction);
     const credit = PrintStatement.formatCreditColumn(transaction);

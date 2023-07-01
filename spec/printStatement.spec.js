@@ -82,5 +82,25 @@ describe('PrintStatement Tests', () => {
       //Assert
       expect(formattedBankStatementRow).toBe(expected);
     })
-})
+
+    it('should create an array with a header and a transaction row with a date, credit, debit AND balance formatted values ', () => {
+    //Arrange
+      class MockTransaction {
+        getType = () => 'credit';
+        getAmount = () => 1500.55555;
+        getDate = () => new Date(2012, 0, 13);
+      }
+      class MockAccount {
+        getTransactions = () => [{transaction: mockTransaction, balance: 3000.00}]
+      }
+      const header = "date       || credit  || debit  || balance";
+      const mockTransaction = new MockTransaction();
+      const mockAccount = new MockAccount();
+      let expected = [header, '13/01/2012 || 1500.55 ||        || 3000.00'];
+      //Act
+      const formattedRowsArray = PrintStatement.createTransactionsRowsArray(mockAccount.getTransactions());
+      //Assert
+      expect(formattedRowsArray).toEqual(expected);
+    })
+  })
 });
