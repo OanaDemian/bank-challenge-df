@@ -36,8 +36,20 @@ describe('PrintStatement Tests', () => {
       const formatDateColumn = PrintStatement.formatDateColumn(mockTransaction);
       //Assert
       expect(formatDateColumn).toBe(expected);
+    })
 
-      
+    it('should format transaction credit column ', () => {
+      //Arrange
+      class MockTransaction {
+        getType = () => 'credit';
+        getAmount = () => 1000.45678
+      }
+      const mockTransaction = new MockTransaction();
+      let expected = '1000.45 || ';
+      //Act
+      const formatCreditColumn = PrintStatement.formatCreditColumn(mockTransaction);
+      //Assert
+      expect(formatCreditColumn).toBe(expected);
     })
   })
 
