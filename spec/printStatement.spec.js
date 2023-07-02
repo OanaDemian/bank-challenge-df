@@ -98,9 +98,55 @@ describe('PrintStatement Tests', () => {
       const mockAccount = new MockAccount();
       let expected = [header, '13/01/2012 || 1500.55 ||        || 3000.00'];
       //Act
-      const formattedRowsArray = PrintStatement.createTransactionsRowsArray(mockAccount.getTransactions());
+      const formattedRowsArray = PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions());
       //Assert
       expect(formattedRowsArray).toEqual(expected);
     })
   })
+
+  describe('console logging tests', () => {
+    let clgSpy, mockAccount, mockTransaction, mockTransaction2, expected;
+    class MockTransaction {
+      getType = () => 'credit';
+      getAmount = () => 1500.55555;
+      getDate = () => new Date(2012, 0, 13);
+    }
+    class MockAccount {
+      getTransactions = () => [{ transaction: mockTransaction, balance: 3000.00 }, { transaction: mockTransaction2, balance: 1000.55 }];
+    }
+    beforeEach(() => {
+      clgSpy = spyOn(console, "log");
+      mockTransaction = new MockTransaction();
+      mockTransaction2 = new MockTransaction();
+      mockAccount = new MockAccount();
+    });
+
+    afterEach(() => {
+      clgSpy = undefined;
+      mockTransaction = undefined;
+      mockTransaction2 = undefined;
+      mockAccount = undefined;
+    });
+    
+    it('should call console.log as many times as the length the bank statements rows array plus one - the header row' , () => {
+      // Arrange 
+      expected = mockAccount.getTransactions().length + 1;
+      // Act
+      PrintStatement.printTransactionsRows(mockAccount.getTransactions());
+        // Assert
+      expect(clgSpy).toHaveBeenCalledTimes(expected);
+    });
+
+
+    it('should call console.log with the correct arguments', () => {
+      // Arrange
+      // Act
+      PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions());
+      const bankStatementRowsArray = PrintStatement.printTransactionsRows(mockAccount.getTransactions());
+
+      // Assert
+      for (let i = 0; i < PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions()).length; i++)
+        expect(clgSpy).toHaveBeenCalledWith(PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions())[i]);
+    });
+  });
 });

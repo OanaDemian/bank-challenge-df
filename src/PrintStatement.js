@@ -5,12 +5,17 @@ class PrintStatement {
     return this.#headerRow;
   }
 
-  static createTransactionsRowsArray(transactionsArray) {
+  static printTransactionsRows(transactionsArray) {
+    PrintStatement.createBankStatementRowsArray(transactionsArray).forEach(stringTransaction => console.log(stringTransaction));
+  }
+
+  static createBankStatementRowsArray(transactionsArray) {
     const outputArray = [];
     outputArray.push(PrintStatement.#headerRow);
     for (let i = 0; i < transactionsArray.length; i++) {
       outputArray.push(PrintStatement.statementRow(transactionsArray[i].transaction).concat(PrintStatement.formatAmount(transactionsArray[i].balance)));
     }
+    // console.log(outputArray)
     return outputArray;
   }
 
