@@ -87,26 +87,26 @@ describe('Account Tests', () => {
 
   });
 
-  describe('Get Transactions tests', () => {   
-    it('should return an empty array of transactions when first instantiated', () => {
+  describe('Get Balance Updates tests', () => {   
+    it('should return an empty balanceUpdate array when first instantiated', () => {
         // Arrange
         // Act
       expected = 0;
         // Assert
-        expect(testAccount.getTransactions().length).toBe(expected);
+        expect(testAccount.getBalanceUpdate().length).toBe(expected);
     });
   });
 
   describe('New Transaction tests', () => {
     let expected;
          
-    it('should add 1 transaction to the transactions when called with newTransaction', () => {
+    it('should add 1 transaction to the balanceUpdate array when called with newTransaction', () => {
       // Arrange
       // Act
       testAccount.newTransaction(mockTransaction);
       expected = 1;
       // Assert
-      expect(testAccount.getTransactions().length).toBe(expected);
+      expect(testAccount.getBalanceUpdate().length).toBe(expected);
     });
 
     it('should add 1 transaction of type `credit` when called with newTransaction', () => {
@@ -114,7 +114,7 @@ describe('Account Tests', () => {
       // Act
       testAccount.newTransaction(mockTransaction);
       expected = 'credit'
-      const transactionType = testAccount.getTransactions()[0].transaction.getType();
+      const transactionType = testAccount.getBalanceUpdate()[0].transaction.getType();
       // Assert
       expect(transactionType).toBe(expected);
     });
@@ -128,7 +128,7 @@ describe('Account Tests', () => {
         expected = 'debit';
       // Act
       testAccount.newTransaction(debitTransaction);
-      const transactionType = testAccount.getTransactions()[0].transaction.getType();
+      const transactionType = testAccount.getBalanceUpdate()[0].transaction.getType();
       // Assert
       expect(transactionType).toBe(expected);
     });

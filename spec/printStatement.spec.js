@@ -91,14 +91,14 @@ describe('PrintStatement Tests', () => {
         getDate = () => new Date(2012, 0, 13);
       }
       class MockAccount {
-        getTransactions = () => [{transaction: mockTransaction, balance: 3000.00}]
+        getBalanceUpdate = () => [{transaction: mockTransaction, balance: 3000.00}]
       }
       const header = "date       || credit  || debit  || balance";
       const mockTransaction = new MockTransaction();
       const mockAccount = new MockAccount();
       let expected = [header, '13/01/2012 || 1500.55 ||        || 3000.00'];
       //Act
-      const formattedRowsArray = PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions());
+      const formattedRowsArray = PrintStatement.createBankStatementRowsArray(mockAccount.getBalanceUpdate());
       //Assert
       expect(formattedRowsArray).toEqual(expected);
     })
@@ -112,7 +112,7 @@ describe('PrintStatement Tests', () => {
       getDate = () => new Date(2012, 0, 13);
     }
     class MockAccount {
-      getTransactions = () => [{ transaction: mockTransaction, balance: 3000.00 }, { transaction: mockTransaction2, balance: 1000.55 }];
+      getBalanceUpdate = () => [{ transaction: mockTransaction, balance: 3000.00 }, { transaction: mockTransaction2, balance: 1000.55 }];
     }
     beforeEach(() => {
       clgSpy = spyOn(console, "log");
@@ -130,9 +130,9 @@ describe('PrintStatement Tests', () => {
     
     it('should call console.log as many times as the length the bank statements rows array plus one - the header row' , () => {
       // Arrange 
-      expected = mockAccount.getTransactions().length + 1;
+      expected = mockAccount.getBalanceUpdate().length + 1;
       // Act
-      PrintStatement.printTransactionsRows(mockAccount.getTransactions());
+      PrintStatement.printTransactionsRows(mockAccount.getBalanceUpdate());
         // Assert
       expect(clgSpy).toHaveBeenCalledTimes(expected);
     });
@@ -141,12 +141,12 @@ describe('PrintStatement Tests', () => {
     it('should call console.log with the correct arguments', () => {
       // Arrange
       // Act
-      PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions());
-      const bankStatementRowsArray = PrintStatement.printTransactionsRows(mockAccount.getTransactions());
+      const bankStatementRowsArray = PrintStatement.createBankStatementRowsArray(mockAccount.getBalanceUpdate());
+      PrintStatement.printTransactionsRows(mockAccount.getBalanceUpdate());
 
       // Assert
-      for (let i = 0; i < PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions()).length; i++)
-        expect(clgSpy).toHaveBeenCalledWith(PrintStatement.createBankStatementRowsArray(mockAccount.getTransactions())[i]);
+      for (let i = 0; i < bankStatementRowsArray.length; i++)
+        expect(clgSpy).toHaveBeenCalledWith(bankStatementRowsArray[i]);
     });
   });
 });

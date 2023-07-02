@@ -5,19 +5,19 @@ class PrintStatement {
     return this.#headerRow;
   }
 
-  static printTransactionsRows(transactionsArray) {
-    PrintStatement.createBankStatementRowsArray(transactionsArray).forEach(stringTransaction => console.log(stringTransaction));
+  static printTransactionsRows(balanceUpdateArray) {
+    PrintStatement.createBankStatementRowsArray(balanceUpdateArray).forEach(stringTransaction => console.log(stringTransaction));
   }
 
-  static createBankStatementRowsArray(transactionsArray) {
-    const outputArray = [];
-    outputArray.push(PrintStatement.#headerRow);
-    for (let i = 0; i < transactionsArray.length; i++) {
-      outputArray.push(PrintStatement.statementRow(transactionsArray[i].transaction).concat(PrintStatement.formatAmount(transactionsArray[i].balance)));
-    }
-    // console.log(outputArray)
-    return outputArray;
+  static createBankStatementRowsArray(balanceUpdateArray) {
+    return [PrintStatement.#headerRow, ...PrintStatement.statementRows(balanceUpdateArray)];
   }
+
+  static statementRows(balanceUpdateArray) {
+    return balanceUpdateArray.map(balanceUpdate =>
+      PrintStatement.statementRow(balanceUpdate.transaction) +
+      PrintStatement.formatAmount(balanceUpdate.balance))
+  }  
 
   static statementRow(transaction) {
     const date = PrintStatement.formatDateColumn(transaction);
@@ -28,17 +28,17 @@ class PrintStatement {
   }
 
   static formatCreditColumn(transaction) {
-    if (transaction.getType() === 'credit') {
-      return PrintStatement.formatTransactionAmount(transaction) + ' || ';
+    if (transaction.getType() === "credit") {
+      return PrintStatement.formatTransactionAmount(transaction) + " || ";
     }
-    return '        || ';
+    return "        || ";
   }
 
   static formatDebitColumn(transaction) {
-    if (transaction.getType() === 'debit') {
-      return PrintStatement.formatTransactionAmount(transaction) + ' || ';
+    if (transaction.getType() === "debit") {
+      return PrintStatement.formatTransactionAmount(transaction) + " || ";
     }
-    return '       || ';
+    return "       || ";
   } 
 
   static formatTransactionAmount(transaction) {
@@ -46,12 +46,12 @@ class PrintStatement {
   }
 
   static formatAmount(amount) {
-    let formattedAmount = '';
-    if (amount.toString().includes('.')) {
-      formattedAmount = amount.toString().slice(0, [amount.toString().indexOf('.') + 3]);
+    let formattedAmount = "";
+    if (amount.toString().includes(".")) {
+      formattedAmount = amount.toString().slice(0, [amount.toString().indexOf(".") + 3]);
       return formattedAmount;
     }
-    return amount.toString() + '.00';
+    return amount.toString() + ".00";
   }
   
   static formatDateColumn(transaction) {
