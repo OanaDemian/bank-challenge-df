@@ -3,9 +3,9 @@ class Transaction {
   #type;
   #amount;
   
-  constructor(date = new Date(), type, amount = 0) {
+  constructor(date = new Date(), transactionType, amount = 0) {
     this.#date = date;
-    this.#type = type;
+    this.#type = transactionType;
     this.#amount = amount;
   }
 
