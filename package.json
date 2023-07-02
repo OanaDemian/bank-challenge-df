@@ -1,7 +1,7 @@
 {
   "name": "bank-challenge",
   "version": "1.0.0",
-  "description": "oana demian's bank challenge",
+  "description": "Oana Demian's bank challenge",
   "main": "index.js",
   "type": "module",
   "directories": {
@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jasmine",
     "lint": "npx eslint src",
-    "lint:fix": "npx eslint src --fix"
+    "lint:fix": "npx eslint src --fix",
+    "runMe": "node src/index.js"
   },
   "author": "Oana Demian",
   "license": "ISC",
