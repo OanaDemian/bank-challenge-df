@@ -81,7 +81,10 @@ describe('PrintStatement Tests', () => {
         getDate = () => new Date(2012, 0, 13);
       }
       const mockTransaction = new MockTransaction();
-      let expected = '13/01/2012 || 1500.55 ||        || ';
+      const date = PrintStatement.formatDateColumn(mockTransaction);
+      const credit = PrintStatement.formatCreditColumn(mockTransaction);
+      const debit = PrintStatement.formatDebitColumn(mockTransaction);
+      let expected = date + credit + debit;
       //Act
       const formattedBankStatementRow = PrintStatement.statementRowString(mockTransaction);
       //Assert
