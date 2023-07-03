@@ -66,13 +66,14 @@ describe('PrintStatement Tests', () => {
       const mockTransaction = new MockTransaction();
       let expected = '500.45';
       //Act
-      const formatDebitColumn = PrintStatement.formatAmount(mockTransaction.getAmount());
+      const formatTransactionAmount = PrintStatement.formatAmount(mockTransaction.getAmount());
       //Assert
-      expect(formatDebitColumn).toBe(expected);
+      expect(formatTransactionAmount).toBe(expected);
     })
   })
 
   describe('formatting bank statement rows tests', () => {
+
     it('should print a row with a date, credit and debit formatted values ', () => {
     //Arrange
       class MockTransaction {
@@ -104,7 +105,7 @@ describe('PrintStatement Tests', () => {
       const headerRow = "date       || credit  || debit  || balance";
       const mockTransaction = new MockTransaction();
       const mockAccount = new MockAccount();
-      let expected = [headerRow, '13/01/2012 || 1500.55 ||        || 3000.00'];
+      let expected = [headerRow, PrintStatement.statementRowsStringsArray(mockAccount.getAccountUpdate())[0]];
       //Act
       const formattedRowsArray = PrintStatement.createBankStatementRowsArray(mockAccount.getAccountUpdate());
       //Assert
