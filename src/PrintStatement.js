@@ -1,25 +1,25 @@
 class PrintStatement { 
   static #headerRow = "date       || credit  || debit  || balance";
 
-  static printHeader() {
+  static printHeaderRow() {
     return this.#headerRow;
   }
 
-  static printTransactionsRows(balanceUpdateArray) {
-    PrintStatement.createBankStatementRowsArray(balanceUpdateArray).forEach(stringTransaction => console.log(stringTransaction));
+  static printTransactionsRows(accountUpdateArray) {
+    PrintStatement.createBankStatementRowsArray(accountUpdateArray).forEach(stringTransaction => console.log(stringTransaction));
   }
 
-  static createBankStatementRowsArray(balanceUpdateArray) {
-    return [PrintStatement.#headerRow, ...PrintStatement.statementRows(balanceUpdateArray)];
+  static createBankStatementRowsArray(accountUpdateArray) {
+    return [PrintStatement.#headerRow, ...PrintStatement.statementRowsStringsArray(accountUpdateArray)];
   }
 
-  static statementRows(balanceUpdateArray) {
-    return balanceUpdateArray.map(balanceUpdate =>
-      PrintStatement.statementRow(balanceUpdate.transaction) +
-      PrintStatement.formatAmount(balanceUpdate.balance))
+  static statementRowsStringsArray(accountUpdateArray) {
+    return accountUpdateArray.map(accountUpdate =>
+      PrintStatement.statementRowString(accountUpdate.transaction) +
+      PrintStatement.formatAmount(accountUpdate.balance));
   }  
 
-  static statementRow(transaction) {
+  static statementRowString(transaction) {
     const date = PrintStatement.formatDateColumn(transaction);
     const credit = PrintStatement.formatCreditColumn(transaction);
     const debit = PrintStatement.formatDebitColumn(transaction);
