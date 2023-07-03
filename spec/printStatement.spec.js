@@ -56,6 +56,20 @@ describe('PrintStatement Tests', () => {
       //Assert
       expect(formatDebitColumn).toBe(expected);
     })
+
+    it('should format transaction amount ', () => {
+      //Arrange
+      class MockTransaction {
+        getType = () => 'debit';
+        getAmount = () => 500.45678
+      }
+      const mockTransaction = new MockTransaction();
+      let expected = '500.45';
+      //Act
+      const formatDebitColumn = PrintStatement.formatAmount(mockTransaction.getAmount());
+      //Assert
+      expect(formatDebitColumn).toBe(expected);
+    })
   })
 
   describe('formatting bank statement rows tests', () => {
