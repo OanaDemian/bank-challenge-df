@@ -87,26 +87,26 @@ describe('Account Tests', () => {
 
   });
 
-  describe('Get Balance Updates tests', () => {   
-    it('should return an empty balanceUpdate array when first instantiated', () => {
+  describe('Account Update tests', () => {   
+    it('should return an empty accountUpdate array when first instantiated', () => {
         // Arrange
         // Act
       expected = 0;
         // Assert
-        expect(testAccount.getBalanceUpdate().length).toBe(expected);
+        expect(testAccount.getAccountUpdate().length).toBe(expected);
     });
   });
 
   describe('New Transaction tests', () => {
     let expected;
          
-    it('should add 1 transaction to the balanceUpdate array when called with newTransaction', () => {
+    it('should add 1 transaction to the accountUpdate array when called with newTransaction', () => {
       // Arrange
       // Act
       testAccount.newTransaction(mockTransaction);
       expected = 1;
       // Assert
-      expect(testAccount.getBalanceUpdate().length).toBe(expected);
+      expect(testAccount.getAccountUpdate().length).toBe(expected);
     });
 
     it('should add 1 transaction of type `credit` when called with newTransaction', () => {
@@ -114,7 +114,7 @@ describe('Account Tests', () => {
       // Act
       testAccount.newTransaction(mockTransaction);
       expected = 'credit'
-      const transactionType = testAccount.getBalanceUpdate()[0].transaction.getType();
+      const transactionType = testAccount.getAccountUpdate()[0].transaction.getType();
       // Assert
       expect(transactionType).toBe(expected);
     });
@@ -128,12 +128,29 @@ describe('Account Tests', () => {
         expected = 'debit';
       // Act
       testAccount.newTransaction(debitTransaction);
-      const transactionType = testAccount.getBalanceUpdate()[0].transaction.getType();
+      const transactionType = testAccount.getAccountUpdate()[0].transaction.getType();
       // Assert
       expect(transactionType).toBe(expected);
     });
 
-    
+    it('should add the newest transaction at the start of the accountUpdate array', () => {
+      // Arrange
+      const transaction2 =  {
+        getAmount: () => 2000,
+        getType: () => 'credit'
+      };
+      const transaction3 =  {
+        getAmount: () => 500,
+        getType: () => 'debit'
+      };
+      expected = transaction3;
+      // Act
+      testAccount.newTransaction(transaction2);
+      testAccount.newTransaction(transaction3);
+      const transactionType = testAccount.getAccountUpdate()[0].transaction;
+      // Assert
+      expect(transactionType).toBe(expected);
+    });
   });
 
   describe('Get Balance Tests', () => {
