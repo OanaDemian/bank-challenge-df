@@ -1,16 +1,16 @@
 class Account {
   #transaction;
   #balance = 0.0;
-  #balanceUpdate = [];
+  #accountUpdate = [];
 
   constructor() {
     this.#transaction = {};
-    this.#balanceUpdate;
+    this.#accountUpdate;
     this.#balance;
   }
 
-  getBalanceUpdate() {
-    return this.#balanceUpdate;
+  getAccountUpdate() {
+    return this.#accountUpdate;
   }
 
   getBalance() {
@@ -43,12 +43,12 @@ class Account {
 
   #privateDeposit() {
     this.#balance = this.#balance + this.#transaction.getAmount();
-    this.#balanceUpdate = [{ transaction: this.#transaction, balance: this.#balance}, ...this.#balanceUpdate];  
+    this.#accountUpdate = [{ transaction: this.#transaction, balance: this.#balance}, ...this.#accountUpdate];  
   }
 
   #privateWithdrawal() {
     this.#balance = this.#balance - this.#transaction.getAmount();
-    this.#balanceUpdate = [{ transaction: this.#transaction, balance: this.#balance}, ...this.#balanceUpdate];  
+    this.#accountUpdate = [{ transaction: this.#transaction, balance: this.#balance}, ...this.#accountUpdate];  
   }
 
   newTransaction(transaction) {
